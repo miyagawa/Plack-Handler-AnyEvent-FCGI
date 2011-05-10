@@ -8,6 +8,8 @@ use AnyEvent;
 use AnyEvent::FCGI;
 use Plack::Util;
 use IO::Handle::Util qw(io_from_write_cb);
+use URI;
+use URI::Escape;
 
 sub new {
     my($class, %args) = @_;
@@ -48,6 +50,12 @@ sub _on_request {
     my($self, $app, $request) = @_;
 
     my $env = $request->params;
+
+    # deal with ligttpd/nginx path normalization
+    my $uri = URI->new("http://localhost" .  $env->{REQUEST_URI});
+    $env->{PATH_INFO} = URI::Escape::uri_unescape($uri->path);
+    $env->{PATH_INFO} =~ s/^\Q$env->{SCRIPT_NAME}\E//;
+
     $env = {
         %$env,
         'psgi.version'      => [1,1],
