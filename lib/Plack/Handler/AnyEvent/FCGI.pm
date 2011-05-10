@@ -121,7 +121,7 @@ Plack::Handler::AnyEvent::FCGI - Asynchronous FCGI handler for PSGI using AnyEve
 
 =head1 SYNOPSIS
 
-  > plackup -s AnyEvent::FCGI myapp.psgi
+  > plackup --listen /tmp/fastcgi.sock -s AnyEvent::FCGI myapp.psgi
 
 =head1 DESCRIPTION
 

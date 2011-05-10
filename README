@@ -3,7 +3,7 @@ NAME
     using AnyEvent::FCGI
 
 SYNOPSIS
-      > plackup -s AnyEvent::FCGI myapp.psgi
+      > plackup --listen /tmp/fastcgi.sock -s AnyEvent::FCGI myapp.psgi
 
 DESCRIPTION
     Plack::Handler::AnyEvent::FCGI is a PSGI adapter for AnyEvent::FCGI
